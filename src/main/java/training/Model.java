@@ -7,7 +7,7 @@ import java.util.List;
  * Created by daniel on 28/10/16.
  */
 public class Model {
-    private int value;
+    private int secretValue;
     private int min;
     private int max;
     private List<Integer> attempts = new ArrayList<Integer>();
@@ -17,23 +17,34 @@ public class Model {
      * @param valueInt
      * @return boolean
      */
-    public boolean compareValue(int valueInt){
-        return value==valueInt;
+    public boolean checkValue (int value){
+        if (value == secretValue){
+            return true;
+        } else if (value > secretValue){
+            max = value;
+        } else {
+            min = value;
+        }
+        return false;
+    }
+    public void setPrimaryBarrier(int min, int max){
+        this.min = min; // check
+        this.max = max;
     }
     /**
      * getter for main value
      * @return int
      */
     public int getValue() {
-        return value;
+        return secretValue;
     }
     /**
-     * setter for main value
-     * @param value
+     * setter for secretValue
      * @return void
      */
-    public void setValue(int value) {
-        this.value = value;
+    public void setSecretValue() {
+        secretValue = (int)Math.ceil(Math.random() *
+                (max - min -1) + min);
     }
     /**
      * getter for minimum value of range
@@ -86,5 +97,16 @@ public class Model {
      */
     public boolean isZeroDifference(){
         return ((this.max - this.min)==0);
+    }
+    public int getSecretValue() {
+        return secretValue;
+    }
+
+    public int getMinBarrier() {
+        return min;
+    }
+
+    public int getMaxBarrier() {
+        return max;
     }
 }

@@ -31,31 +31,17 @@ public class Controller {
      * main controller method works with user
      * contains logic loops and conditions
      */
-    public void processUser() {
-        view.printMessage(view.HELLO);
-        model.setValue((int)(Math.random()*100));
-        model.setMin(MIN_INT);
-        model.setMax(MAX_INT);
-        boolean equal=false;
-        int currentValue;
+    public void processUser(){
+        Scanner sc = new Scanner(System.in);
 
-        while (!equal) {
-            Scanner sc = new Scanner(System.in);
-            currentValue = validateInputValue(sc);
-            model.addAttempts(currentValue);
-            showAttempts(model.getAttempts());
-            equal = model.compareValue(currentValue);
+        model.setPrimaryBarrier(GlobalConstants.PRIMARY_MIN_BARRIER,
+                GlobalConstants.PRIMARY_MAX_BARRIER);
+        model.setSecretValue();
+        System.out.println(model.getSecretValue());
 
-            if (model.getValue()>currentValue) {
-                model.setMin(currentValue+1);
-                view.printMessageAndInt(view.MORE_THAN, currentValue);
-            } else if (model.getValue()<currentValue){
-                model.setMax(currentValue-1);
-                view.printMessageAndInt(view.LESS_THAN, currentValue);
-            }
-            islastChance();
-        }
-        view.printMessageAndInt(view.CONGRATULATIONS, model.getValue());
+        while (!model.checkValue(inputIntValueWithScanner(sc))){}
+
+        view.printMessage(View.CONGRATULATION + model.getSecretValue());
     }
 
     /**
@@ -64,14 +50,27 @@ public class Controller {
      * @return int
      */
     public int inputIntValueWithScanner(Scanner sc) {
-        view.printRange(view.RANGE,model.getMin(),model.getMax());
-        view.printMessage(view.INPUT_INT_NUM);
+        int res=0;
+        view.printMessage(View.INPUT_INT_DATA +
+                model.getMinBarrier() + model.getMaxBarrier());
 
-        while(!sc.hasNextInt()) {
-            view.printMessage(view.WRONG_INPUT_INT_DATA);
-            sc.next();
+        while( true ) {
+            // check int - value
+            while (!sc.hasNextInt()) {
+                view.printMessage(View.WRONG_INPUT_INT_DATA
+                        + View.INPUT_INT_DATA);
+                sc.next();
+            }
+            // check value in diapason
+            if ((res = sc.nextInt()) <= model.getMinBarrier() ||
+                    res >= model.getMaxBarrier()) {
+                view.printMessage(View.WRONG_RANGE_DATA
+                        + View.INPUT_INT_DATA);
+                continue ;
+            }
+            break;
         }
-        return sc.nextInt();
+        return res;
     }
 
     /**
