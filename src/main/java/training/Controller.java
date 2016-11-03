@@ -8,11 +8,6 @@ import java.util.Scanner;
  * Created by daniel on 28/10/16.
  */
 public class Controller {
-    /**
-     * final static fields for range
-     */
-    public static final int MAX_INT = 100;
-    public static final int MIN_INT = 0;
 
     /**
      * constructor for initialization model and view
@@ -32,16 +27,15 @@ public class Controller {
      * contains logic loops and conditions
      */
     public void processUser(){
+        view.printMessage(View.HELLO);
         Scanner sc = new Scanner(System.in);
 
         model.setPrimaryBarrier(GlobalConstants.PRIMARY_MIN_BARRIER,
                 GlobalConstants.PRIMARY_MAX_BARRIER);
         model.setSecretValue();
-        System.out.println(model.getSecretValue());
 
-        while (!model.checkValue(inputIntValueWithScanner(sc))){}
-
-        view.printMessage(View.CONGRATULATION + model.getSecretValue());
+        while (!model.checkValue(inputIntValueWithScanner(sc))){ }
+        view.printMessage(View.CONGRATULATIONS + model.getSecretValue());
     }
 
     /**
@@ -51,21 +45,22 @@ public class Controller {
      */
     public int inputIntValueWithScanner(Scanner sc) {
         int res=0;
-        view.printMessage(View.INPUT_INT_DATA +
-                model.getMinBarrier() + model.getMaxBarrier());
+        showAttempts(model.getAttempts());
+        view.printMessage(View.INPUT_INT_NUM);
+        view.printRange(View.RANGE,model.getMin(),model.getMax());
 
         while( true ) {
             // check int - value
             while (!sc.hasNextInt()) {
                 view.printMessage(View.WRONG_INPUT_INT_DATA
-                        + View.INPUT_INT_DATA);
+                        + View.INPUT_INT_NUM);
                 sc.next();
             }
             // check value in diapason
             if ((res = sc.nextInt()) <= model.getMinBarrier() ||
                     res >= model.getMaxBarrier()) {
-                view.printMessage(View.WRONG_RANGE_DATA
-                        + View.INPUT_INT_DATA);
+                view.printMessage(View.OUT_OF_RANGE
+                        + View.WRONG_INPUT_INT_DATA);
                 continue ;
             }
             break;
@@ -80,9 +75,9 @@ public class Controller {
      */
     public void showAttempts(List<Integer> attempts) {
         for (int attempt : attempts) {
-            view.printAttempts(view.SPACE+attempt);
+            view.printAttempts(View.SPACE+attempt);
         }
-        view.printMessage(view.SPACE);
+        view.printMessage(View.SPACE);
     }
     /**
      * utility method validates input value from keyboard
@@ -103,17 +98,7 @@ public class Controller {
      * @return true if input is between min and max
      */
     public boolean isBetweenCurrentRange(int input) {
-        return (input>=model.getMin() && input<=model.getMax());
+        return (input>model.getMin() && input<model.getMax());
     }
-    /**
-     * utility method
-     * end the game if user lose
-     * in case of no variants for choose
-     */
-    public void islastChance() {
-        if (model.isZeroDifference()){
-            view.printMessageAndInt(view.LOSE,model.getValue());
-            System.exit(0);
-        }
-    }
+
 }

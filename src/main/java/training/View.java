@@ -8,15 +8,12 @@ public class View {
      * text constants
      */
     public static final String HELLO ="Hello! Let`s play the game!";
-    public static final String INPUT_INT_NUM = " Try to guess a number: ";
+    public static final String INPUT_INT_NUM = "Try to guess a number : ";
     public static final String WRONG_INPUT_INT_DATA = "Wrong input! Repeat please!";
-    public static final String MORE_THAN = "Unfortunately, my number is more than ";
-    public static final String LESS_THAN = "Unfortunately, my number is less than ";
     public static final String OUT_OF_RANGE = "What for? Pay attention!";
-    public static final String RANGE = "Current range is between: ";
+    public static final String RANGE = "Current number is between: ";
     public static final String AND = " and ";
     public static final String SPACE = " ";
-    public static final String LOSE = "Sorry, you lose! My number was: ";
     public static final String CONGRATULATIONS = "Congratulations! You won! My number was: ";
 
     /**
@@ -55,5 +52,12 @@ public class View {
     public void printRange(String message, int min, int max){
         System.out.println(message + min + AND + max);
     }
-
+    public void concatenationAndPrint(String... message){
+        StringBuilder concatString = new StringBuilder();
+        for(String v : message) {
+            concatString = concatString.append(v);
+        }
+        printMessage(new String(concatString));
+        //System.out.println(concatString);
+    }
 }

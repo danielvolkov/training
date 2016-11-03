@@ -14,7 +14,7 @@ public class Model {
     // The Program logic
     /**
      * this method compares our random value with user input
-     * @param valueInt
+     * @param value
      * @return boolean
      */
     public boolean checkValue (int value){
@@ -22,8 +22,10 @@ public class Model {
             return true;
         } else if (value > secretValue){
             max = value;
+            addAttempts(value);
         } else {
             min = value;
+            addAttempts(value);
         }
         return false;
     }
@@ -32,10 +34,10 @@ public class Model {
         this.max = max;
     }
     /**
-     * getter for main value
+     * getter for secretvalue
      * @return int
      */
-    public int getValue() {
+    public int getSecretValue() {
         return secretValue;
     }
     /**
@@ -97,9 +99,6 @@ public class Model {
      */
     public boolean isZeroDifference(){
         return ((this.max - this.min)==0);
-    }
-    public int getSecretValue() {
-        return secretValue;
     }
 
     public int getMinBarrier() {

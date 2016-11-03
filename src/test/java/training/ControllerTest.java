@@ -31,9 +31,9 @@ public class ControllerTest {
         Model model = new Model();
         View view = new View();
         controller = new Controller(model,view);
-        model.setValue((int)(Math.random()*100));
-        model.setMin(controller.MIN_INT);
-        model.setMax(controller.MAX_INT);
+        model.setSecretValue();
+        model.setMin(GlobalConstants.PRIMARY_MIN_BARRIER);
+        model.setMax(GlobalConstants.PRIMARY_MAX_BARRIER);
     }
 
     // simulate wrong user inputs until correct

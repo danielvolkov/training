@@ -16,12 +16,12 @@ public class ModelTest {
     @Before
     public void modelInit(){
         model = new Model();
-        model.setValue(VALUE);
+        model.setSecretValue();
     }
     // test comparation values
     @Test
     public void compareValueTest(){
-        assertTrue(model.compareValue(VALUE));
+        assertTrue(model.checkValue(VALUE));
     }
     // test last iteration, when no more variants to guess ( max-min)
     // wait true
