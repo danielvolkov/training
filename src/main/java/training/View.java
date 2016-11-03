@@ -1,13 +1,17 @@
 package training;
 
 /**
- * Created by daniel on 28/10/16.
+ * View class for MoreOrLess game
+ * @author daniel.volkov
  */
 public class View {
     /**
      * text constants
      */
     public static final String HELLO ="Hello! Let`s play the game!";
+    public static final String ENTER_RANGE ="Please eneter min and max";
+    public static final String ENTER_MIN ="Min: ";
+    public static final String ENTER_MAX ="Max: ";
     public static final String INPUT_INT_NUM = "Try to guess a number : ";
     public static final String WRONG_INPUT_INT_DATA = "Wrong input! Repeat please!";
     public static final String OUT_OF_RANGE = "What for? Pay attention!";

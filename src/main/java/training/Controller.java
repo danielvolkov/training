@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Created by daniel on 28/10/16.
+ * Controller class for MoreOrLess game
+ * @author daniel.volkov
  */
 public class Controller {
 
@@ -28,12 +29,17 @@ public class Controller {
      */
     public void processUser(){
         view.printMessage(View.HELLO);
+        view.printMessage(View.ENTER_RANGE);
+        view.printMessage(View.ENTER_MIN);
         Scanner sc = new Scanner(System.in);
-
-        model.setPrimaryBarrier(GlobalConstants.PRIMARY_MIN_BARRIER,
-                GlobalConstants.PRIMARY_MAX_BARRIER);
+        waitInt(sc);
+        model.setMin(sc.nextInt());
+        view.printMessage(View.ENTER_MAX);
+        waitInt(sc);
+        model.setMax(sc.nextInt());
+       // model.setPrimaryBarrier(GlobalConstants.PRIMARY_MIN_BARRIER,
+               // GlobalConstants.PRIMARY_MAX_BARRIER);
         model.setSecretValue();
-
         while (!model.checkValue(inputIntValueWithScanner(sc))){ }
         view.printMessage(View.CONGRATULATIONS + model.getSecretValue());
     }
@@ -44,28 +50,21 @@ public class Controller {
      * @return int
      */
     public int inputIntValueWithScanner(Scanner sc) {
-        int res=0;
+        int[] res ={0} ;
         showAttempts(model.getAttempts());
         view.printMessage(View.INPUT_INT_NUM);
         view.printRange(View.RANGE,model.getMin(),model.getMax());
 
         while( true ) {
             // check int - value
-            while (!sc.hasNextInt()) {
-                view.printMessage(View.WRONG_INPUT_INT_DATA
-                        + View.INPUT_INT_NUM);
-                sc.next();
-            }
+            waitInt(sc);
             // check value in diapason
-            if ((res = sc.nextInt()) <= model.getMinBarrier() ||
-                    res >= model.getMaxBarrier()) {
-                view.printMessage(View.OUT_OF_RANGE
-                        + View.WRONG_INPUT_INT_DATA);
+            if (checkRange(sc,res)){
                 continue ;
             }
             break;
         }
-        return res;
+        return res[0];
     }
 
     /**
@@ -79,26 +78,33 @@ public class Controller {
         }
         view.printMessage(View.SPACE);
     }
+
     /**
-     * utility method validates input value from keyboard
+     * wait int value from scanner
      * @param sc
-     * @return int value from our range
      */
-    public int validateInputValue(Scanner sc){
-        int result=inputIntValueWithScanner(sc);
-        while(!isBetweenCurrentRange(result)) {
-            view.printMessage(view.OUT_OF_RANGE);
-            result = inputIntValueWithScanner(sc);
+
+    public void waitInt(Scanner sc){
+        while (!sc.hasNextInt()) {
+            view.printMessage(View.WRONG_INPUT_INT_DATA
+                    + View.INPUT_INT_NUM);
+            sc.next();
         }
-        return result;
     }
+
     /**
-     * utility method
-     * @param input
-     * @return true if input is between min and max
+     * checking value by range
+     * @param sc
+     * @return true if input value is from current range
      */
-    public boolean isBetweenCurrentRange(int input) {
-        return (input>model.getMin() && input<model.getMax());
+    public boolean checkRange(Scanner sc, int[] res){
+        if ((res[0] = sc.nextInt()) <= model.getMinBarrier() ||
+                res[0] >= model.getMaxBarrier()) {
+            view.printMessage(View.OUT_OF_RANGE
+                    + View.WRONG_INPUT_INT_DATA);
+            return true;
+        }
+        return false;
     }
 
 }

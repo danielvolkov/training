@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by daniel on 28/10/16.
+ * Model class for MoreOrLess game
+ * @author daniel.volkov
  */
 public class Model {
     private int secretValue;

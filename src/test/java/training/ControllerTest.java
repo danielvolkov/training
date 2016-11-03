@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Created by daniel on 29/10/16.
+ * Main class for MoreOrLess game
+ * @author daniel.volkov
  */
 public class ControllerTest {
     public static final String EMPTY_VALUE = "";
@@ -43,7 +44,7 @@ public class ControllerTest {
             System.setIn(new ByteArrayInputStream(userInput.getBytes()));
         }
         Scanner scanner = new Scanner(System.in);
-        int currentValue = controller.validateInputValue(scanner);
+        int currentValue = controller.inputIntValueWithScanner(scanner);
         assertEquals(currentValue,Integer.parseInt(INT_VALUE));
     }
     // simulate correct user inputs
@@ -51,24 +52,26 @@ public class ControllerTest {
     public void intInputTest(){
         System.setIn(new ByteArrayInputStream(INT_VALUE.getBytes()));
         Scanner scanner = new Scanner(System.in);
-        int currentValue = controller.validateInputValue(scanner);
+        int currentValue = controller.inputIntValueWithScanner(scanner);
         assertEquals(currentValue,Integer.parseInt(INT_VALUE));
     }
     // check boundary max value
     @Test
     public void maxIntInputTest(){
         System.setIn(new ByteArrayInputStream(BOUNDARY_MAX.getBytes()));
+        System.setIn(new ByteArrayInputStream(INT_VALUE.getBytes()));
         Scanner scanner = new Scanner(System.in);
-        int currentValue = controller.validateInputValue(scanner);
-        assertEquals(currentValue,Integer.parseInt(BOUNDARY_MAX));
+        int currentValue = controller.inputIntValueWithScanner(scanner);
+        assertNotEquals(currentValue,Integer.parseInt(BOUNDARY_MAX));
     }
     // check boundary min value
     @Test
     public void minIntInputTest(){
         System.setIn(new ByteArrayInputStream(BOUNDARY_MIN.getBytes()));
+        System.setIn(new ByteArrayInputStream(INT_VALUE.getBytes()));
         Scanner scanner = new Scanner(System.in);
-        int currentValue = controller.validateInputValue(scanner);
-        assertEquals(currentValue,Integer.parseInt(BOUNDARY_MIN));
+        int currentValue = controller.inputIntValueWithScanner(scanner);
+        assertNotEquals(currentValue,Integer.parseInt(BOUNDARY_MIN));
 
     }
     // check out of range value
@@ -77,7 +80,7 @@ public class ControllerTest {
         System.setIn(new ByteArrayInputStream(INT_OUT_OF_RANGE.getBytes()));
         System.setIn(new ByteArrayInputStream(INT_VALUE.getBytes()));
         Scanner scanner = new Scanner(System.in);
-        int currentValue = controller.validateInputValue(scanner);
+        int currentValue = controller.inputIntValueWithScanner(scanner);
         assertEquals(currentValue,Integer.parseInt(INT_VALUE));
     }
 
