@@ -2,6 +2,8 @@ package kitchen;
 
 import food.Salad;
 import food.vegetables.Vegetable;
+import view.View;
+
 import java.util.*;
 import static food.vegetables.VegetablesEnum.*;
 
@@ -11,14 +13,16 @@ import static food.vegetables.VegetablesEnum.*;
  * @author daniel.volkov
  */
 public class Chief {
-    String name;
+    private String name;
+    private View view;
 
     /**
      * Constructor
      * @param name
      */
-    public Chief(String name) {
+    public Chief(String name,View view) {
         this.name = name;
+        this.view = view;
     }
 
     /**
@@ -29,10 +33,11 @@ public class Chief {
         salad.setCalories(countCalories(salad));
         //sort ingridients with TreeSet and return new sorted Set in to salad
         salad.setIngridients(sortByCalories(salad.getIngridients()));
-        printIngridients(salad.getIngridients());
+        view.printIngridients(salad.getIngridients());
+        //range is from 10 to 27 Kcal
         Set<Vegetable> vegetablesByRange=findByCalories(salad,GlobConst.MIN_CALORIES_RANGE,
                 GlobConst.MAX_CALORIES_RANGE);
-        printIngridients(vegetablesByRange);
+        view.printIngridients(vegetablesByRange);
     }
 
     /**
@@ -96,17 +101,6 @@ public class Chief {
             }
         }
         return vegetablesByRange;
-    }
-
-    /**
-     * util method prints set of vegetables
-     * @param ingridients
-     */
-    public void printIngridients(Set<Vegetable> ingridients){
-        System.out.println("---");
-        for ( Vegetable vegetable:ingridients ) {
-            System.out.println(vegetable.getName()+" "+vegetable.getCalories()+GlobConst.KCAL);
-        }
     }
 
 }
