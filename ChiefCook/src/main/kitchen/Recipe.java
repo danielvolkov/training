@@ -1,4 +1,4 @@
-package kitchen;
+package main.kitchen;
 
 /**
  * enum with Recipie of salad

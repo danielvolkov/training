@@ -1,4 +1,4 @@
-package kitchen;
+package main.kitchen;
 
 /**
  * Created by daniel.volkov on 16/11/16.

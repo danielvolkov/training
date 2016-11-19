@@ -1,8 +1,8 @@
 package main;
 
-import kitchen.Chief;
-import kitchen.GlobConst;
-import view.View;
+import main.kitchen.Chief;
+import main.kitchen.GlobConst;
+import main.view.View;
 
 /**
  * Main class

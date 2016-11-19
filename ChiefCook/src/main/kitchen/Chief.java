@@ -1,11 +1,10 @@
-package kitchen;
+package main.kitchen;
 
-import food.Salad;
-import food.vegetables.Vegetable;
-import view.View;
-
+import main.food.Salad;
+import main.food.vegetables.Vegetable;
+import main.view.View;
 import java.util.*;
-import static food.vegetables.VegetablesEnum.*;
+import static main.food.vegetables.VegetablesEnum.*;
 
 /**
  * Chief class
@@ -64,7 +63,7 @@ public class Chief {
     }
 
     /**
-     * method for count calories in to salad
+     * method for counting calories in to salad
      * @param salad object
      * @return general calories
      */
@@ -79,7 +78,7 @@ public class Chief {
     /**
      * method sort vegetables in order by calories of vegetables
      * @param ingridients
-     * @return sorted THreeSet with ingridients ordered by calories
+     * @return sorted ThreeSet with ingridients ordered by calories
      */
     public Set<Vegetable> sortByCalories(Collection ingridients) {
         return new TreeSet<Vegetable>(ingridients);

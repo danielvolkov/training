@@ -1,7 +1,7 @@
-package food.vegetables;
+package main.food.vegetables;
 
 
-import food.Eatable;
+import main.food.Eatable;
 
 /**
  * Vegetable entity

@@ -1,7 +1,7 @@
-package view;
+package main.view;
 
-import food.vegetables.Vegetable;
-import kitchen.GlobConst;
+import main.food.vegetables.Vegetable;
+import main.kitchen.GlobConst;
 import java.util.Set;
 
 /**

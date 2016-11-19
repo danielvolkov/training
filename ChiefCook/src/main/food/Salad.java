@@ -1,7 +1,8 @@
-package food;
+package main.food;
 
 
-import food.vegetables.Vegetable;
+import main.food.vegetables.Vegetable;
+
 import java.util.HashSet;
 import java.util.Set;
 

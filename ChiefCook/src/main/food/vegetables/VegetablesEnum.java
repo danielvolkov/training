@@ -1,4 +1,4 @@
-package food.vegetables;
+package main.food.vegetables;
 
 /**
  * init enum for vegetables
