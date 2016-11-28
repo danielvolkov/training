@@ -1,7 +1,4 @@
-package singleton;
-
-import javax.print.DocFlavor;
-import java.io.InputStream;
+package singleton.doblechecked;
 
 /**
  * Created by daniel on 21/11/16.
